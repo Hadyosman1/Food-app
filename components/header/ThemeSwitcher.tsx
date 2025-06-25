@@ -35,19 +35,19 @@ const ThemeSwitcher = () => {
             <Sun
               key="light"
               size={ICON_SIZE}
-              className={"text-muted-foreground"}
+              className={"dark:text-primary-foreground text-accent-foreground"}
             />
           ) : theme === "dark" ? (
             <Moon
               key="dark"
               size={ICON_SIZE}
-              className={"text-muted-foreground"}
+              className={"dark:text-primary-foreground text-accent-foreground"}
             />
           ) : (
             <Laptop
               key="system"
               size={ICON_SIZE}
-              className={"text-muted-foreground"}
+              className={"dark:text-primary-foreground text-accent-foreground"}
             />
           )}
         </Button>
@@ -75,4 +75,4 @@ const ThemeSwitcher = () => {
   );
 };
 
-export { ThemeSwitcher };
+export default ThemeSwitcher;

@@ -16,10 +16,20 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 
-export function LoginForm({
+interface LoginFormProps {
+  className?: string;
+  insideDialog?: boolean;
+  setAuthTypeToSignUp?: () => void;
+  onLoginSuccess?: () => void;
+}
+
+export default function LoginForm({
   className,
+  insideDialog = false,
+  setAuthTypeToSignUp,
+  onLoginSuccess,
   ...props
-}: React.ComponentPropsWithoutRef<"div">) {
+}: LoginFormProps & React.ComponentPropsWithoutRef<"div">) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState<string | null>(null);
@@ -39,7 +49,8 @@ export function LoginForm({
       });
       if (error) throw error;
       // Update this route to redirect to an authenticated route. The user already has an active session.
-      router.push("/protected");
+      router.refresh();
+      onLoginSuccess?.();
     } catch (error: unknown) {
       setError(error instanceof Error ? error.message : "An error occurred");
     } finally {
@@ -49,7 +60,7 @@ export function LoginForm({
 
   return (
     <div className={cn("flex flex-col gap-6", className)} {...props}>
-      <Card>
+      <Card className={cn("", insideDialog && "border-none shadow-none")}>
         <CardHeader>
           <CardTitle className="text-2xl">Login</CardTitle>
           <CardDescription>
@@ -95,12 +106,21 @@ export function LoginForm({
             </div>
             <div className="mt-4 text-center text-sm">
               Don&apos;t have an account?{" "}
-              <Link
-                href="/auth/sign-up"
-                className="underline underline-offset-4"
-              >
-                Sign up
-              </Link>
+              {insideDialog ? (
+                <button
+                  onClick={setAuthTypeToSignUp}
+                  className="underline underline-offset-4"
+                >
+                  Sign up
+                </button>
+              ) : (
+                <Link
+                  href="/auth/sign-up"
+                  className="underline underline-offset-4"
+                >
+                  Sign up
+                </Link>
+              )}
             </div>
           </form>
         </CardContent>

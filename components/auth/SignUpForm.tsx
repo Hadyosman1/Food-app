@@ -1,7 +1,5 @@
 "use client";
 
-import { cn } from "@/lib/utils";
-import { createClient } from "@/lib/supabase/client";
 import { Button } from "@/components/ui/button";
 import {
   Card,
@@ -12,14 +10,24 @@ import {
 } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import { createClient } from "@/lib/supabase/client";
+import { cn } from "@/lib/utils";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 
-export function SignUpForm({
+interface SignUpFormProps {
+  className?: string;
+  insideDialog?: boolean;
+  setAuthTypeToLogin?: () => void;
+}
+
+export default function SignUpForm({
   className,
+  insideDialog = false,
+  setAuthTypeToLogin,
   ...props
-}: React.ComponentPropsWithoutRef<"div">) {
+}: SignUpFormProps & React.ComponentPropsWithoutRef<"div">) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [repeatPassword, setRepeatPassword] = useState("");
@@ -44,11 +52,11 @@ export function SignUpForm({
         email,
         password,
         options: {
-          emailRedirectTo: `${window.location.origin}/protected`,
+          emailRedirectTo: `${window.location.href}`,
         },
       });
       if (error) throw error;
-      router.push("/auth/sign-up-success");
+      router.refresh();
     } catch (error: unknown) {
       setError(error instanceof Error ? error.message : "An error occurred");
     } finally {
@@ -58,7 +66,7 @@ export function SignUpForm({
 
   return (
     <div className={cn("flex flex-col gap-6", className)} {...props}>
-      <Card>
+      <Card className={cn("", insideDialog && "border-none shadow-none")}>
         <CardHeader>
           <CardTitle className="text-2xl">Sign up</CardTitle>
           <CardDescription>Create a new account</CardDescription>
@@ -108,9 +116,21 @@ export function SignUpForm({
             </div>
             <div className="mt-4 text-center text-sm">
               Already have an account?{" "}
-              <Link href="/auth/login" className="underline underline-offset-4">
-                Login
-              </Link>
+              {insideDialog ? (
+                <button
+                  onClick={setAuthTypeToLogin}
+                  className="underline underline-offset-4"
+                >
+                  Login
+                </button>
+              ) : (
+                <Link
+                  href="/auth/login"
+                  className="underline underline-offset-4"
+                >
+                  Login
+                </Link>
+              )}
             </div>
           </form>
         </CardContent>

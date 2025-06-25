@@ -1,7 +1,10 @@
+import { createClient } from "@/lib/supabase/server";
+import ThemeProvider from "@/components/providers/ThemeProvider";
+import UserProvider from "@/components/providers/UserProvider";
 import type { Metadata } from "next";
 import { Geist } from "next/font/google";
-import { ThemeProvider } from "next-themes";
 import "./globals.css";
+import { Toaster } from "sonner";
 
 const defaultUrl = process.env.VERCEL_URL
   ? `https://${process.env.VERCEL_URL}`
@@ -19,21 +22,20 @@ const geistSans = Geist({
   subsets: ["latin"],
 });
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const supabaseClient = await createClient();
+  const { data } = await supabaseClient.auth.getUser();
+
   return (
     <html lang="en" suppressHydrationWarning>
       <body className={`${geistSans.className} antialiased`}>
-        <ThemeProvider
-          attribute="class"
-          defaultTheme="system"
-          enableSystem
-          disableTransitionOnChange
-        >
-          {children}
+        <ThemeProvider>
+          <UserProvider user={data?.user}>{children}</UserProvider>
+          <Toaster />
         </ThemeProvider>
       </body>
     </html>
