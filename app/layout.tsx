@@ -1,10 +1,10 @@
-import { createClient } from "@/lib/supabase/server";
 import ThemeProvider from "@/components/providers/ThemeProvider";
 import UserProvider from "@/components/providers/UserProvider";
+import { createClient } from "@/lib/supabase/server";
 import type { Metadata } from "next";
 import { Geist } from "next/font/google";
-import "./globals.css";
 import { Toaster } from "sonner";
+import "./globals.css";
 
 const defaultUrl = process.env.VERCEL_URL
   ? `https://${process.env.VERCEL_URL}`

@@ -14,12 +14,11 @@ interface ProductsCarouselProps {
 
 export default function ProductsCarousel({ products }: ProductsCarouselProps) {
   return (
-    <Carousel
-      opts={{
-        align: "start",
-      }}
-      className="w-full"
-    >
+    <Carousel opts={{ align: "start" }} className="w-full">
+      <div className="flex items-center justify-end gap-3 pt-2">
+        <CarouselPrevious variant="default" className="static" />
+        <CarouselNext variant="default" className="static" />
+      </div>
       <CarouselContent>
         {products.map((product) => (
           <CarouselItem
@@ -32,8 +31,6 @@ export default function ProductsCarousel({ products }: ProductsCarouselProps) {
           </CarouselItem>
         ))}
       </CarouselContent>
-      <CarouselPrevious variant="default" className={"left-2"} />
-      <CarouselNext variant="default" className={"right-2"} />
     </Carousel>
   );
 }

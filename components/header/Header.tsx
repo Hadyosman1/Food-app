@@ -2,20 +2,25 @@
 
 import AuthButton from "@/components/auth/AuthButton";
 import MobileMenu from "@/components/header/MobileMenu";
+import useUser from "@/hooks/useUser";
 import { cn } from "@/lib/utils";
 import logo from "@/public/logo.png";
 import Image from "next/image";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 import CartButton from "../CartButton";
 import UserButton from "../user/UserButton";
 import NavLinks from "./NavLinks";
 import ThemeSwitcher from "./ThemeSwitcher";
+import WishlistButton from "../WishlistButton";
 
 export default function Header() {
   const [isScrolled, setIsScrolled] = useState(false);
 
-  const user = null;
+  const pathname = usePathname();
+  const isHomePage = pathname === "/";
+  const { user } = useUser();
 
   useEffect(() => {
     const handleHeaderScroll = () => {
@@ -36,7 +41,7 @@ export default function Header() {
       className={cn(
         "fixed top-0 z-50 h-(--header-height) w-full transition-all duration-300",
         {
-          "bg-header shadow": isScrolled,
+          "bg-header shadow": isScrolled || !isHomePage,
         },
       )}
     >
@@ -47,12 +52,14 @@ export default function Header() {
             alt="logo"
             width={90}
             height={60}
-            className={cn({ "invert-100 dark:invert-0": isScrolled })}
+            className={cn({
+              "invert-100 dark:invert-0": isScrolled || !isHomePage,
+            })}
           />
         </Link>
 
         <div className={cn("ms-auto hidden items-center gap-3 md:flex")}>
-          <NavLinks isScrolled={isScrolled} />
+          <NavLinks isScrolled={isScrolled || !isHomePage} />
 
           <span className="text-secondary-foreground">|</span>
 
@@ -62,7 +69,12 @@ export default function Header() {
 
           <span className="text-secondary-foreground">|</span>
 
-          <CartButton />
+          {user && (
+            <>
+              <WishlistButton />
+              <CartButton />
+            </>
+          )}
 
           {!user && <AuthButton />}
           {user && <UserButton user={user} />}

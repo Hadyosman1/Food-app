@@ -3,9 +3,9 @@ import CategoriesList from "../categories/CategoriesList";
 
 export default function CategoriesSection() {
   return (
-    <section className="py-12">
+    <section id="categories" className="py-12">
       <MainHeading>Our Categories</MainHeading>
-        <CategoriesList />
+      <CategoriesList />
     </section>
   );
 }

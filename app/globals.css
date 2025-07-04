@@ -180,7 +180,7 @@
   }
 
   .scroll-to-down-animation {
-    animation: scroll-to-down-animation 0.8s infinite ease-in-out alternate;
+    animation: scroll-to-down-animation 1s infinite ease-in-out alternate;
   }
 
   :is(button, [role="button"], a):not(:disabled) {

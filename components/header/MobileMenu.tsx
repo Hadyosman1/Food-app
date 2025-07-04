@@ -2,19 +2,22 @@ import UserButton from "@/components/user/UserButton";
 import { MenuIcon } from "lucide-react";
 import AuthButton from "../auth/AuthButton";
 import CartButton from "../CartButton";
-import NavLinks from "./NavLinks";
-import ThemeSwitcher from "./ThemeSwitcher";
 import { Button } from "../ui/button";
 import {
   Sheet,
   SheetContent,
+  SheetDescription,
   SheetHeader,
   SheetTitle,
   SheetTrigger,
 } from "../ui/sheet";
+import NavLinks from "./NavLinks";
+import ThemeSwitcher from "./ThemeSwitcher";
+import useUser from "@/hooks/useUser";
+import WishlistButton from "../WishlistButton";
 
 export default function MobileMenu({ className }: { className?: string }) {
-  const user = null;
+  const { user } = useUser();
 
   return (
     <Sheet>
@@ -27,7 +30,11 @@ export default function MobileMenu({ className }: { className?: string }) {
       <SheetContent side="right">
         <SheetHeader>
           <SheetTitle>Menu</SheetTitle>
+          <SheetDescription className="sr-only">
+            mobile menu for navigation
+          </SheetDescription>
         </SheetHeader>
+
         <div className="flex flex-col gap-6 px-4">
           <NavLinks isScrolled className="flex-col" />
           <hr />
@@ -36,8 +43,15 @@ export default function MobileMenu({ className }: { className?: string }) {
 
             <span className="text-secondary-foreground">|</span>
 
-            <CartButton />
-            {user ? <UserButton user={user} /> : <AuthButton />}
+            {user ? (
+              <>
+                <WishlistButton />
+                <CartButton />
+                <UserButton user={user} />
+              </>
+            ) : (
+              <AuthButton />
+            )}
           </div>
         </div>
       </SheetContent>

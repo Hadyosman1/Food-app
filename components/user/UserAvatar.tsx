@@ -14,7 +14,7 @@ export default function UserAvatar({
   return (
     <div
       className={cn(
-        "flex aspect-square items-center justify-center rounded-full shadow",
+        "flex aspect-square items-center overflow-clip justify-center rounded-full shadow",
         className,
       )}
       style={{ width: size ?? 32 }}

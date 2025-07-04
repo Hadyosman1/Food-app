@@ -1,9 +1,12 @@
 "use client";
 
+import { createClient } from "@/lib/supabase/client";
+import { User } from "@supabase/supabase-js";
 import { LogOutIcon, User2 } from "lucide-react";
-
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { useState, useTransition } from "react";
+import { toast } from "sonner";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -11,10 +14,6 @@ import {
   DropdownMenuTrigger,
 } from "../ui/dropdown-menu";
 import UserAvatar from "./UserAvatar";
-import { User } from "@supabase/supabase-js";
-import { createClient } from "@/lib/supabase/client";
-import { toast } from "sonner";
-import { useRouter } from "next/navigation";
 
 export default function UserButton({
   user,
@@ -23,7 +22,6 @@ export default function UserButton({
   user: User;
   avatarSize?: number;
 }) {
-  console.log(user);
   const [isOpen, setIsOpen] = useState(false);
   const [isPending, startTransition] = useTransition();
 
@@ -33,6 +31,7 @@ export default function UserButton({
   const signOut = () => {
     startTransition(async () => {
       const { error } = await supabaseClient.auth.signOut();
+
       if (error) {
         console.error(error);
         toast.error(error.message);
@@ -46,7 +45,7 @@ export default function UserButton({
     <DropdownMenu open={isOpen} onOpenChange={setIsOpen}>
       <DropdownMenuTrigger>
         <UserAvatar
-          src={user.user_metadata.avatar}
+          src={user?.user_metadata?.avatar || ""}
           size={avatarSize}
           className="bg-secondary"
         />

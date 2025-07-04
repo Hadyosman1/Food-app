@@ -10,3 +10,10 @@ export async function getProductsByCollectionId(
     .eq("collection_id", collectionId)
     .eq("products.is_available", true);
 }
+
+export async function getProductById(
+  client: SupabaseClient,
+  productId: string,
+) {
+  return client.from("products").select("*").eq("id", productId).single();
+}
