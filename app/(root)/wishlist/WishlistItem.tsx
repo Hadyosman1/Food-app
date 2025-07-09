@@ -1,9 +1,9 @@
 import ProductCard from "@/components/products/ProductCard";
 import ProductCardSkeleton from "@/components/products/ProductCardSkeleton";
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
-import { Tables } from "@/database.types";
 import { createClient } from "@/lib/supabase/client";
 import { getProductById } from "@/services/products";
+import { Product } from "@/types/globals";
 import { useEffect, useState } from "react";
 
 interface WishlistItemProps {
@@ -13,7 +13,7 @@ interface WishlistItemProps {
 export default function WishlistItem({ itemId }: WishlistItemProps) {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<Error | null>(null);
-  const [data, setData] = useState<Tables<"products"> | null>(null);
+  const [data, setData] = useState<Product | null>(null);
 
   useEffect(() => {
     const fetchData = async () => {

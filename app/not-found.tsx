@@ -43,8 +43,8 @@ export default function NotFoundPage() {
             </CardTitle>
 
             <CardDescription className="text-muted-foreground mx-auto max-w-md text-lg">
-              Looks like this recipe got lost in the kitchen! The page you're
-              looking for doesn't exist or has been moved.
+              {`Looks like this recipe got lost in the kitchen! The page you're
+              looking for doesn't exist or has been moved.`}
             </CardDescription>
           </CardHeader>
 

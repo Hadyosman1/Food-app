@@ -1,7 +1,9 @@
 "use client";
 
 import AuthButton from "@/components/auth/AuthButton";
+import CartButton from "@/components/cart/CartButton";
 import MobileMenu from "@/components/header/MobileMenu";
+import WishlistButton from "@/components/wishlist/WishlistButton";
 import useUser from "@/hooks/useUser";
 import { cn } from "@/lib/utils";
 import logo from "@/public/logo.png";
@@ -9,11 +11,9 @@ import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
-import CartButton from "../CartButton";
 import UserButton from "../user/UserButton";
 import NavLinks from "./NavLinks";
 import ThemeSwitcher from "./ThemeSwitcher";
-import WishlistButton from "../WishlistButton";
 
 export default function Header() {
   const [isScrolled, setIsScrolled] = useState(false);

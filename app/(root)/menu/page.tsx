@@ -2,12 +2,13 @@ import MainHeading from "@/components/MainHeading";
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 import { Tables } from "@/database.types";
 import { createClient } from "@/lib/supabase/server";
+import { Product as ProductType } from "@/types/globals";
 import { PinIcon } from "lucide-react";
 import Category from "./Category";
 import Product from "./Product";
 
 type Category = Tables<"categories">;
-type Products = Omit<Tables<"products">, "gallery">[];
+type Products = Omit<ProductType, "gallery">[];
 
 type Menu = { category: Category; products: Products }[];
 
@@ -31,8 +32,6 @@ export default async function MenuPage() {
     );
   }
 
-  console.log(menuItems[0]);
-
   return (
     <main>
       <div className="container space-y-12 py-12">
@@ -43,7 +42,7 @@ export default async function MenuPage() {
             {menuItems.map(({ category, products }) => (
               <div
                 key={category.id}
-                className="bg-card mb-6 space-y-6 overflow-hidden rounded-2xl border p-5 shadow"
+                className="bg-card mb-6 break-inside-avoid space-y-6 rounded-2xl border p-5 shadow"
               >
                 <PinIcon className="text-primary fill-primary/40 absolute size-8 -translate-x-[calc(100%+5px)] -translate-y-[calc(100%+5px)] -rotate-28" />
                 <Category category={category} />

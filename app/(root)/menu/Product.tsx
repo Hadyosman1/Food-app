@@ -1,12 +1,12 @@
-import { Tables } from "@/database.types";
 import { formatCurrency } from "@/lib/utils";
+import { Product as ProductType } from "@/types/globals";
 import Image from "next/image";
 import Link from "next/link";
 
 export default function Product({
   product,
 }: {
-  product: Omit<Tables<"products">, "gallery">;
+  product: Omit<ProductType, "gallery">;
 }) {
   return (
     <Link
@@ -27,7 +27,7 @@ export default function Product({
           alt={product.title}
           width={80}
           height={80}
-          className="rounded-2xl shadow ms-auto"
+          className="ms-auto rounded-2xl shadow"
         />
       </div>
       <strong className="text-primary">

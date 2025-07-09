@@ -2,7 +2,7 @@
 
 import { createClient } from "@/lib/supabase/client";
 import { User } from "@supabase/supabase-js";
-import { LogOutIcon, User2 } from "lucide-react";
+import { LogOutIcon, ShoppingBagIcon, User2 } from "lucide-react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useState, useTransition } from "react";
@@ -53,7 +53,13 @@ export default function UserButton({
       <DropdownMenuContent align="end">
         <DropdownMenuItem asChild>
           <Link className="w-full cursor-pointer" href="/profile">
-            Profile <User2 />
+            <User2 /> Profile
+          </Link>
+        </DropdownMenuItem>
+
+        <DropdownMenuItem asChild>
+          <Link className="w-full cursor-pointer" href="/cart">
+            <ShoppingBagIcon /> Your cart
           </Link>
         </DropdownMenuItem>
 
@@ -63,7 +69,7 @@ export default function UserButton({
             onClick={signOut}
             disabled={isPending}
           >
-            Logout <LogOutIcon />
+            <LogOutIcon /> Logout
           </button>
         </DropdownMenuItem>
       </DropdownMenuContent>

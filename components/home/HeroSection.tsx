@@ -90,8 +90,8 @@ export default function HeroSection() {
         onMouseLeave={handleMouseLeave}
         className="container flex min-h-full items-center gap-4 py-12"
       >
-        <div className="text-secondary flex grow flex-col gap-6 max-md:items-center lg:shrink-1">
-          <h1 className="py-3 text-4xl font-black md:self-start md:text-6xl lg:text-7xl">
+        <div className="text-secondary flex grow flex-col gap-6 max-md:items-center max-md:text-center lg:shrink-1">
+          <h1 className="py-3 text-4xl font-black text-balance capitalize [word-spacing:-6px] md:self-start md:text-6xl lg:text-8xl">
             We will kill your hunger
           </h1>
           <p className="max-w-[780px] text-lg md:text-2xl">

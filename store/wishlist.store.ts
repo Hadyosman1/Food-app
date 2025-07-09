@@ -2,14 +2,14 @@ import { createClient } from "@/lib/supabase/client";
 import { addToWishlist, removeFromWishlist } from "@/services/wishlist";
 import { create } from "zustand";
 
-interface WishlistItem {
+export interface WishlistItem {
   product_id: string;
 }
 
 export const useWishlistStore = create<{
   wishlist: WishlistItem[];
   setWishlist: (wishlist: WishlistItem[]) => void;
-  toggleWishlistItem: (product_id: string) => void;
+  toggleWishlistItem: (product_id: string) => Promise<void>;
   clearWishlist: () => void;
   isInWishlist: (product_id: string) => boolean;
 }>((set, get) => ({

@@ -1,7 +1,7 @@
-import { HeartIcon } from "lucide-react";
-import { Button } from "./ui/button";
-import Link from "next/link";
+import { Button } from "@/components/ui/button";
 import { useWishlistStore } from "@/store/wishlist.store";
+import { HeartIcon } from "lucide-react";
+import Link from "next/link";
 
 export default function WishlistButton() {
   const { wishlist } = useWishlistStore();

@@ -1,8 +1,8 @@
-import { getAllCategories } from "@/services/categories";
-import CategoryCard from "./CategoryCard";
-import { InfoIcon } from "lucide-react";
-import { createClient } from "@/lib/supabase/server";
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
+import { createClient } from "@/lib/supabase/server";
+import { getAllCategories } from "@/services/categories";
+import { InfoIcon } from "lucide-react";
+import CategoryCard from "./CategoryCard";
 
 export default async function CategoriesList() {
   const supabaseClient = await createClient();

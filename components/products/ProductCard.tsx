@@ -1,38 +1,19 @@
-"use client";
-
-import { Tables } from "@/database.types";
-import { cn, formatCurrency } from "@/lib/utils";
-import { useWishlistStore } from "@/store/wishlist.store";
-import { ArrowUpRightIcon, HeartIcon, ShoppingCartIcon } from "lucide-react";
+import { formatCurrency } from "@/lib/utils";
+import { Product } from "@/types/globals";
+import { ArrowUpRightIcon } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
-import { toast } from "sonner";
+import AddToCartButton from "../cart/AddToCartButton";
 import { Badge } from "../ui/badge";
 import { Button } from "../ui/button";
+import ToggleWishlistItemButton from "../wishlist/ToggleWishlistItemButton";
 
 interface ProductCardProps {
-  product: Tables<"products">;
+  product: Product;
   badge?: string;
 }
 
 export default function ProductCard({ product, badge }: ProductCardProps) {
-  const toggleWishlistItem = useWishlistStore(
-    (state) => state.toggleWishlistItem,
-  );
-
-  const isInWishlist = useWishlistStore((state) =>
-    state.isInWishlist(product.id),
-  );
-
-  const handleToggleWishlistItem = () => {
-    try {
-      toggleWishlistItem(product.id);
-    } catch (error) {
-      console.error(error);
-      toast.error((error as Error).message);
-    }
-  };
-
   return (
     <div className="group transition-all duration-300 ease-in-out hover:-translate-y-[3px]">
       <div className="relative">
@@ -43,20 +24,7 @@ export default function ProductCard({ product, badge }: ProductCardProps) {
           height={500}
           className="aspect-square w-full rounded-t-xl object-cover drop-shadow-md select-none"
         />
-        <Button
-          onClick={handleToggleWishlistItem}
-          variant="secondary"
-          size="icon"
-          className="absolute right-3.5 opacity-0 transition-all duration-200 ease-in-out md:top-7 md:group-hover:top-3.5 md:group-hover:opacity-100"
-        >
-          <HeartIcon
-            className={cn(
-              "transition-all duration-200 ease-in-out",
-              isInWishlist && "fill-primary text-primary",
-            )}
-          />
-          <span className="sr-only">Add to wishlist</span>
-        </Button>
+        <ToggleWishlistItemButton product={product} />
         {badge && <Badge className="absolute top-3.5 left-3.5">{badge}</Badge>}
       </div>
       <div className="bg-sidebar -mt-2 scale-103 space-y-2.5 rounded-xl px-3 py-4 shadow">
@@ -72,9 +40,7 @@ export default function ProductCard({ product, badge }: ProductCardProps) {
           {product.description}
         </p>
         <div className="flex gap-x-1.5 gap-y-2.5 max-md:flex-wrap-reverse">
-          <Button className="grow gap-1">
-            Add to cart <ShoppingCartIcon />
-          </Button>
+          <AddToCartButton product={product} />
           <Button
             asChild
             className="h-auto gap-1"

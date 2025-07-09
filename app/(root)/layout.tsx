@@ -1,45 +1,33 @@
-"use client";
-
 import Header from "@/components/header/Header";
-import useUser from "@/hooks/useUser";
-import { createClient } from "@/lib/supabase/client";
+import CartProvider from "@/components/providers/CartProvider";
+import WishlistProvider from "@/components/providers/WishlistProvider";
+import { createClient } from "@/lib/supabase/server";
+import { getCart } from "@/services/cart";
 import { getWishlist } from "@/services/wishlist";
-import { useWishlistStore } from "@/store/wishlist.store";
-import { useEffect } from "react";
-import { toast } from "sonner";
+import { CartItem } from "@/store/cart.store";
+import { WishlistItem } from "@/store/wishlist.store";
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const { user } = useUser();
-  const supabase = createClient();
-  const setWishlist = useWishlistStore((state) => state.setWishlist);
+  const supabase = await createClient();
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
 
-  useEffect(() => {
-    const fetchWishlist = async () => {
-      const { data: wishlist, error } = await getWishlist(
-        supabase,
-        user?.id ?? "",
-      );
-
-      if (error) {
-        console.error(error);
-        toast.error("Failed to fetch wishlist");
-      }
-
-      if (wishlist) {
-        setWishlist(wishlist);
-      }
-    };
-    fetchWishlist();
-  }, [setWishlist, supabase, user?.id]);
+  const [{ data: cart }, { data: wishlist }] = await Promise.all([
+    getCart(supabase, user?.id ?? "").catch(() => ({ data: [] })),
+    getWishlist(supabase, user?.id ?? "").catch(() => ({ data: [] })),
+  ]);
 
   return (
-    <>
-      <Header />
-      <div className="mt-(--header-height)">{children}</div>
-    </>
+    <CartProvider cart={cart as CartItem[]}>
+      <WishlistProvider wishlist={wishlist as WishlistItem[]}>
+        <Header />
+        <div className="mt-(--header-height)">{children}</div>
+      </WishlistProvider>
+    </CartProvider>
   );
 }

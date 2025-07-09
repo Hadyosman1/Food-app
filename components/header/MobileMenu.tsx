@@ -1,7 +1,9 @@
+import CartButton from "@/components/cart/CartButton";
 import UserButton from "@/components/user/UserButton";
+import WishlistButton from "@/components/wishlist/WishlistButton";
+import useUser from "@/hooks/useUser";
 import { MenuIcon } from "lucide-react";
 import AuthButton from "../auth/AuthButton";
-import CartButton from "../CartButton";
 import { Button } from "../ui/button";
 import {
   Sheet,
@@ -13,8 +15,6 @@ import {
 } from "../ui/sheet";
 import NavLinks from "./NavLinks";
 import ThemeSwitcher from "./ThemeSwitcher";
-import useUser from "@/hooks/useUser";
-import WishlistButton from "../WishlistButton";
 
 export default function MobileMenu({ className }: { className?: string }) {
   const { user } = useUser();

@@ -1,12 +1,13 @@
 import { Tables } from "@/database.types";
 import { createClient } from "@/lib/supabase/server";
 import { getProductsByCollectionId } from "@/services/products";
+import { Product } from "@/types/globals";
 import { InfoIcon } from "lucide-react";
 import MainHeading from "../MainHeading";
-import { Alert, AlertDescription, AlertTitle } from "../ui/alert";
 import ProductCard from "../products/ProductCard";
 import ProductsCarousel from "../products/ProductsCarousel";
 import ProductsGrid from "../products/ProductsGrid";
+import { Alert, AlertDescription, AlertTitle } from "../ui/alert";
 
 interface CollectionProps {
   collection: Tables<"collections">;
@@ -32,7 +33,7 @@ export default async function Collection({ collection }: CollectionProps) {
 
   const products = data
     .map((obj) => obj.products)
-    .filter(Boolean) as unknown as Tables<"products">[];
+    .filter(Boolean) as unknown as Product[];
 
   if (products.length === 0) return null;
 
@@ -41,7 +42,7 @@ export default async function Collection({ collection }: CollectionProps) {
       <MainHeading>{collection.name}</MainHeading>
 
       {products.length > 4 ? (
-        <ProductsCarousel products={products} />
+        <ProductsCarousel products={products} badge={collection.name} />
       ) : (
         <ProductsGrid>
           {products.map((product) => (
