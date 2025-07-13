@@ -15,5 +15,21 @@ export async function getProductById(
   client: SupabaseClient,
   productId: string,
 ) {
-  return client.from("products").select("*").eq("id", productId).single();
+  return client
+    .from("products")
+    .select("*")
+    .eq("id", productId)
+    .eq("is_available", true)
+    .single();
 }
+
+export const getProductsByCategoryId = async (
+  client: SupabaseClient,
+  categoryId: string,
+) => {
+  return client
+    .from("products")
+    .select("*")
+    .eq("category_id", categoryId)
+    .eq("is_available", true);
+};

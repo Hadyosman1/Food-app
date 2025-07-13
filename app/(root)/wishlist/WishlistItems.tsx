@@ -33,7 +33,10 @@ export default function WishlistItems() {
   }
 
   return (
-    <div className="space-y-6">
+    <div className="">
+      <h2 className="-mb-6 text-lg font-medium">
+        ({wishlist.length} {wishlist.length > 1 ? "Items" : "Item"})
+      </h2>
       <ProductsGrid>
         {wishlist.map((item) => (
           <WishlistItem key={item.product_id} itemId={item.product_id} />

@@ -3,7 +3,7 @@ import { Product } from "@/types/globals";
 import { ArrowUpRightIcon } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
-import AddToCartButton from "../cart/AddToCartButton";
+import AddToCartButton from "../cart/OpenAddToCartDialogButton";
 import { Badge } from "../ui/badge";
 import { Button } from "../ui/button";
 import ToggleWishlistItemButton from "../wishlist/ToggleWishlistItemButton";

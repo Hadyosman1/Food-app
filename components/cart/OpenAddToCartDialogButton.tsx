@@ -8,12 +8,15 @@ import { useState } from "react";
 import { toast } from "sonner";
 import { Button } from "../ui/button";
 import CartItemDialog from "./CartItemDialog";
+import AddToCartButton from "../products/AddToCartButton";
 
-interface AddToCartButtonProps {
+interface OpenAddToCartDialogButtonProps {
   product: Product;
 }
 
-export default function AddToCartButton({ product }: AddToCartButtonProps) {
+export default function OpenAddToCartDialogButton({
+  product,
+}: OpenAddToCartDialogButtonProps) {
   const [isOpen, setIsOpen] = useState(false);
   const [selectedVariants, setSelectedVariants] = useState<Product["variants"]>(
     () => getInitialSelectedVariants(product.variants),
@@ -51,18 +54,10 @@ export default function AddToCartButton({ product }: AddToCartButtonProps) {
           quantity={quantity}
           setQuantity={setQuantity}
           actionButton={
-            <Button
-              className="grow"
-              onClick={() => handleAddToCart()}
-              disabled={isPending}
-            >
-              Add to cart
-              {isPending ? (
-                <Loader2 className="animate-spin" />
-              ) : (
-                <ShoppingCartIcon />
-              )}
-            </Button>
+            <AddToCartButton
+              handleAddToCart={handleAddToCart}
+              isPending={isPending}
+            />
           }
         />
       )}

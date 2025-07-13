@@ -39,7 +39,7 @@ export default async function Collection({ collection }: CollectionProps) {
 
   return (
     <section className="py-12">
-      <MainHeading>{collection.name}</MainHeading>
+      <MainHeading el="h2">{collection.name}</MainHeading>
 
       {products.length > 4 ? (
         <ProductsCarousel products={products} badge={collection.name} />
@@ -54,8 +54,6 @@ export default async function Collection({ collection }: CollectionProps) {
           ))}
         </ProductsGrid>
       )}
-
-      {/* <pre className="mt-33">{JSON.stringify(products, null, 2)}</pre> */}
     </section>
   );
 }

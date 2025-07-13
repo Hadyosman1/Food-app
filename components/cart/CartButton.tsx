@@ -13,7 +13,7 @@ import { useCartStore } from "@/store/cart.store";
 import { CreditCardIcon, Link2Icon, ShoppingBagIcon } from "lucide-react";
 import Link from "next/link";
 import { useState } from "react";
-import CartItem from "./CartItem";
+import SidebarCartItem from "./SidebarCartItem";
 
 export default function CartButton() {
   const [isOpen, setIsOpen] = useState(false);
@@ -69,11 +69,7 @@ export default function CartButton() {
         <div className="grow space-y-3 overflow-y-auto px-4 py-4">
           {cartItemsLength > 0 ? (
             cartItems.map((cartItem) => (
-              <CartItem
-                insideSideBar={true}
-                key={cartItem.id}
-                cartItem={cartItem}
-              />
+              <SidebarCartItem key={cartItem.id} cartItem={cartItem} />
             ))
           ) : (
             <div className="bg-primary/10 mx-auto flex aspect-square w-fit flex-col items-center justify-center rounded-full p-5">

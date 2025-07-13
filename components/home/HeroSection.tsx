@@ -45,6 +45,11 @@ export default function HeroSection() {
         translateY(${translateY}px)
       `;
 
+      document.querySelectorAll(".food-emoji").forEach((emoji) => {
+        const el = emoji as HTMLSpanElement;
+        el.style.transform = `translate(${translateX}px, ${translateY}px)`;
+      });
+
       isAnimatingRef.current = false;
     });
   };
@@ -84,12 +89,24 @@ export default function HeroSection() {
   }, []);
 
   return (
-    <section className="relative h-full overflow-x-clip pt-22">
-      <div
-        onMouseMove={handleMouseMove}
-        onMouseLeave={handleMouseLeave}
-        className="container flex min-h-full items-center gap-4 py-12"
-      >
+    <section
+      onMouseMove={handleMouseMove}
+      onMouseLeave={handleMouseLeave}
+      className="relative h-full overflow-x-clip pt-[calc(var(--header-height)+3rem)] perspective-[600px] transform-3d"
+    >
+      <span className="food-emoji absolute top-[calc(var(--header-height)+6rem)] right-52 text-5xl transition-all duration-200 ease-out select-none">
+        🍕
+      </span>
+      <span className="food-emoji absolute top-[calc(var(--header-height)+3rem)] left-1/5 text-5xl transition-all duration-200 ease-out select-none">
+        🍔
+      </span>
+      <span className="food-emoji absolute bottom-24 left-24 text-5xl transition-all duration-200 ease-out select-none">
+        🌮
+      </span>
+      <span className="food-emoji absolute right-24 bottom-14 text-5xl transition-all duration-200 ease-out select-none">
+        🌭
+      </span>
+      <div className="container flex min-h-full items-center gap-4 py-12">
         <div className="text-secondary flex grow flex-col gap-6 max-md:items-center max-md:text-center lg:shrink-1">
           <h1 className="py-3 text-4xl font-black text-balance capitalize [word-spacing:-6px] md:self-start md:text-6xl lg:text-8xl">
             We will kill your hunger
@@ -116,7 +133,7 @@ export default function HeroSection() {
             </Button>
           </div>
         </div>
-        <div className="hidden shrink-0 basis-1/2 perspective-[600px] transform-3d lg:block">
+        <div className="hidden shrink-0 basis-1/2 lg:block">
           <Image
             ref={burgerImageRef}
             style={{
@@ -127,7 +144,7 @@ export default function HeroSection() {
             width={500}
             height={500}
             priority
-            className="ms-auto transition-all duration-300 ease-out select-none"
+            className="ms-auto transition-all duration-200 ease-out select-none"
           />
         </div>
       </div>

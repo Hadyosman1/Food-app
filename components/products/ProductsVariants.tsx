@@ -70,13 +70,24 @@ const ProductVariants = ({
         JSON.stringify(prev ?? []),
       );
 
+      let handled = false;
+
       if (!updatedSelectedVariants) return [];
 
       updatedSelectedVariants.forEach((variant) => {
         if (variant.name === variantName) {
           variant.options = [variantOption];
+          handled = true;
         }
       });
+
+      if (!handled) {
+        updatedSelectedVariants.push({
+          name: variantName,
+          type: "single",
+          options: [variantOption],
+        });
+      }
 
       return updatedSelectedVariants;
     });
@@ -100,19 +111,19 @@ const ProductVariants = ({
   };
 
   return (
-    <div className="bg-sidebar space-y-3 rounded-2xl border p-3">
-      <form className="flex flex-col gap-3">
+    <div className="space-y-2">
+      <form className="flex flex-col gap-2">
         {product.variants?.map((variant) => (
           <div
             key={variant.name}
-            className="bg-background space-y-2 rounded-2xl border p-2"
+            className="bg-sidebar w-fit space-y-2.5 rounded-2xl border p-2.5"
           >
             <h3 className="text-primary font-semibold capitalize">
-              {variant.name}
+              <Badge variant="secondary">{variant.name}</Badge>
             </h3>
             <div className="flex flex-wrap gap-x-1 gap-y-2">
               {variant.options.map((variantOption) => {
-                const id = `${variant.name}-${variantOption.name}`;
+                const id = `${variant.name.replace(/\s/g, "_")}-${variantOption.name.replace(/\s/g, "_")}`;
 
                 const extraPrice =
                   variantOption.extra_price > 0
@@ -127,11 +138,11 @@ const ProductVariants = ({
                 return (
                   <Label
                     htmlFor={id}
-                    className="bg-sidebar-accent hover:bg-sidebar-accent/60 flex cursor-pointer items-center gap-1.5 rounded-full px-3 py-2 transition-colors duration-200 has-[:checked]:outline-2"
+                    className="bg-sidebar-accent hover:bg-sidebar-accent/60 flex cursor-pointer items-center gap-1.5 rounded-full px-3 py-2 text-xs transition-colors duration-200 has-[:checked]:outline-2"
                     key={variantOption.name}
                   >
                     <div className="flex flex-col gap-1 text-center">
-                      <span>{variantOption.name}</span>
+                      <span className="">{variantOption.name}</span>
                       <Badge
                         variant="outline"
                         className="border-primary bg-primary/20"
@@ -156,9 +167,9 @@ const ProductVariants = ({
                       }}
                       id={id}
                       checked={isSelected}
-                      name={variant.name}
+                      name={variant.name.replace(/\s/g, "_")}
                       type={variant.type === "single" ? "radio" : "checkbox"}
-                      className="accent-primary size-3.5 shrink-0"
+                      className="accent-primary size-3 shrink-0"
                     />
                   </Label>
                 );

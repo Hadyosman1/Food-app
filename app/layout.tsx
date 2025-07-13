@@ -13,7 +13,7 @@ const defaultUrl = process.env.VERCEL_URL
 export const metadata: Metadata = {
   metadataBase: new URL(defaultUrl),
   title: { default: "Food App", template: "%s | Food App" },
-  description: "Food App - The best food delivery app",
+  description: "Food App - The best food ordering app",
 };
 
 const geistSans = Geist({

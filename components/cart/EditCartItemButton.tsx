@@ -1,7 +1,7 @@
 "use client";
 
 import { CartItem, useCartStore } from "@/store/cart.store";
-import { Edit2, Loader2 } from "lucide-react";
+import { EllipsisVerticalIcon, Loader2 } from "lucide-react";
 import { useEffect, useState } from "react";
 import { toast } from "sonner";
 import { Button } from "../ui/button";
@@ -46,7 +46,7 @@ export default function EditCartItemButton({
   return (
     <>
       <Button onClick={() => setIsOpen(true)} variant="outline" size="icon">
-        <Edit2 />
+        <EllipsisVerticalIcon />
         <span className="sr-only">Edit cart item</span>
       </Button>
 

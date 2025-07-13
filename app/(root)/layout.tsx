@@ -17,14 +17,22 @@ export default async function RootLayout({
     data: { user },
   } = await supabase.auth.getUser();
 
-  const [{ data: cart }, { data: wishlist }] = await Promise.all([
-    getCart(supabase, user?.id ?? "").catch(() => ({ data: [] })),
-    getWishlist(supabase, user?.id ?? "").catch(() => ({ data: [] })),
-  ]);
+  let cart: CartItem[] = [];
+  let wishlist: WishlistItem[] = [];
+
+  if (user) {
+    const [{ data: cartData }, { data: wishlistData }] = await Promise.all([
+      getCart(supabase, user.id).catch(() => ({ data: [] })),
+      getWishlist(supabase, user.id).catch(() => ({ data: [] })),
+    ]);
+
+    cart = cartData as CartItem[];
+    wishlist = wishlistData as WishlistItem[];
+  }
 
   return (
-    <CartProvider cart={cart as CartItem[]}>
-      <WishlistProvider wishlist={wishlist as WishlistItem[]}>
+    <CartProvider cart={cart}>
+      <WishlistProvider wishlist={wishlist}>
         <Header />
         <div className="mt-(--header-height)">{children}</div>
       </WishlistProvider>

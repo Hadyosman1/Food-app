@@ -2,7 +2,11 @@ import MainHeading from "@/components/MainHeading";
 import ProductCard from "@/components/products/ProductCard";
 import ProductsGrid from "@/components/products/ProductsGrid";
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
+import { Tables } from "@/database.types";
 import { createClient } from "@/lib/supabase/server";
+import { getCategoryBySlug } from "@/services/categories";
+import { getProductsByCategoryId } from "@/services/products";
+import { Product } from "@/types/globals";
 import { notFound } from "next/navigation";
 
 interface CategoryPageProps {
@@ -13,20 +17,19 @@ export default async function CategoryPage({ params }: CategoryPageProps) {
   const { slug } = await params;
   const supabase = await createClient();
 
-  const { error: categoryError, data: category } = await supabase
-    .from("categories")
-    .select("*")
-    .eq("slug", slug)
-    .single();
+  const { error: categoryError, data } = await getCategoryBySlug(
+    supabase,
+    slug,
+  );
 
-  if (!category) {
+  if (!data) {
     notFound();
   }
 
-  const { error: productsError, data: categoryProducts } = await supabase
-    .from("products")
-    .select("*")
-    .eq("category_id", category.id);
+  const category = data as Tables<"categories">;
+
+  const { error: productsError, data: categoryProducts } =
+    await getProductsByCategoryId(supabase, category.id);
 
   if (productsError || categoryError) {
     return (
@@ -39,7 +42,7 @@ export default async function CategoryPage({ params }: CategoryPageProps) {
     );
   }
 
-  console.log(categoryProducts);
+  const products = categoryProducts as Product[];
 
   return (
     <main>
@@ -47,7 +50,7 @@ export default async function CategoryPage({ params }: CategoryPageProps) {
         <MainHeading>{category.name}</MainHeading>
 
         <ProductsGrid>
-          {categoryProducts.map((product) => (
+          {products.map((product) => (
             <ProductCard key={product.id} product={product} />
           ))}
         </ProductsGrid>
