@@ -1,27 +1,26 @@
-<a href="https://demo-nextjs-with-supabase.vercel.app/">
-  <img alt="Next.js and Supabase Starter Kit - the fastest way to build apps with Next.js and Supabase" src="https://demo-nextjs-with-supabase.vercel.app/opengraph-image.png">
-  <h1 align="center">Next.js and Supabase Starter Kit</h1>
-</a>
+<div align="center">
+  <img src="public/logo.png" alt="Food App Logo" width="150" />
+  <h1>Food App 🍔🍕</h1>
+  <p><b>The modern, full-stack food delivery app built with Next.js, Supabase, and Tailwind CSS.</b></p>
+  <p>
+    <a href="#features">Features</a> ·
+    <a href="#demo">Demo</a> ·
+    <a href="#getting-started">Getting Started</a> ·
+    <a href="#contributing">Contributing</a> ·
+    <a href="#license">License</a>
+  </p>
+</div>
 
-<p align="center">
- The fastest way to build apps with Next.js and Supabase
-</p>
+---
 
-<p align="center">
-  <a href="#features"><strong>Features</strong></a> ·
-  <a href="#demo"><strong>Demo</strong></a> ·
-  <a href="#deploy-to-vercel"><strong>Deploy to Vercel</strong></a> ·
-  <a href="#clone-and-run-locally"><strong>Clone and run locally</strong></a> ·
-  <a href="#feedback-and-issues"><strong>Feedback and issues</strong></a>
-  <a href="#more-supabase-examples"><strong>More Examples</strong></a>
-</p>
-<br/>
+## 🚀 Overview
 
-## Features
+Food App is a sleek, production-ready food delivery platform. Users can browse menus, add items to their cart, manage profiles and wishlists, and place orders—all in a beautiful, responsive UI. Built with a modern stack, it’s easy to extend, deploy, and maintain.
+
+## ✨ Features
 
 - Works across the entire [Next.js](https://nextjs.org) stack
   - App Router
-  - Pages Router
   - Middleware
   - Client
   - Server
@@ -33,23 +32,90 @@
 - Optional deployment with [Supabase Vercel Integration and Vercel deploy](#deploy-your-own)
   - Environment variables automatically assigned to Vercel project
 
-## Demo
+## 📦 Installation
 
-You can view a fully working demo at [demo-nextjs-with-supabase.vercel.app](https://demo-nextjs-with-supabase.vercel.app/).
+1. **Clone the repo**
+   ```bash
+   git clone https://github.com/your-username/food-app.git
+   cd food-app
+   ```
+2. **Install dependencies**
+   ```bash
+   npm install
+   # or
+   yarn install
+   # or
+   pnpm install
+   ```
+3. **Setup environment variables**
+   - Copy `.env.example` to `.env.local` and fill in your Supabase credentials:
+     ```env
+     NEXT_PUBLIC_SUPABASE_URL=your-supabase-url
+     NEXT_PUBLIC_SUPABASE_ANON_KEY=your-supabase-anon-key
+     ```
+4. **Run the development server**
+   ```bash
+   npm run dev
+   ```
+   The app will be running at [http://localhost:3000](http://localhost:3000)
 
-## Deploy to Vercel
+---
 
-Vercel deployment will guide you through creating a Supabase account and project.
+## 🚚 Deployment
 
-After installation of the Supabase integration, all relevant environment variables will be assigned to the project so the deployment is fully functioning.
+- Ready for [Vercel](https://vercel.com/) one-click deployment.
+- Configure environment variables in your Vercel dashboard.
 
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Fvercel%2Fnext.js%2Ftree%2Fcanary%2Fexamples%2Fwith-supabase&project-name=nextjs-with-supabase&repository-name=nextjs-with-supabase&demo-title=nextjs-with-supabase&demo-description=This+starter+configures+Supabase+Auth+to+use+cookies%2C+making+the+user%27s+session+available+throughout+the+entire+Next.js+app+-+Client+Components%2C+Server+Components%2C+Route+Handlers%2C+Server+Actions+and+Middleware.&demo-url=https%3A%2F%2Fdemo-nextjs-with-supabase.vercel.app%2F&external-id=https%3A%2F%2Fgithub.com%2Fvercel%2Fnext.js%2Ftree%2Fcanary%2Fexamples%2Fwith-supabase&demo-image=https%3A%2F%2Fdemo-nextjs-with-supabase.vercel.app%2Fopengraph-image.png)
+---
 
-The above will also clone the Starter kit to your GitHub, you can clone that locally and develop locally.
+## 📋 Usage
 
-If you wish to just develop locally and not deploy to Vercel, [follow the steps below](#clone-and-run-locally).
+- Browse the menu, add items to your cart, and checkout securely.
+- Manage your wishlist and user profile.
+- Admins can extend the app for order management, analytics, and more.
 
-## Clone and run locally
+---
+
+## 🧑‍💻 Contributing
+
+Pull requests are welcome! For major changes, please open an issue first to discuss what you would like to change.
+
+1. Fork the repo
+2. Create your feature branch (`git checkout -b feature/your-feature`)
+3. Commit your changes (`git commit -am 'Add new feature'`)
+4. Push to the branch (`git push origin feature/your-feature`)
+5. Open a Pull Request
+
+---
+
+## 📄 License
+
+This project is licensed under the MIT License.
+
+---
+
+## 🙋 Contact
+
+For support or inquiries, please open an issue or contact the maintainer.
+
+---
+
+## 🗺️ Roadmap
+
+- [x] Product details & variants
+- [x] Cart & checkout
+- [x] Wishlist
+- [x] User authentication
+- [ ] Orders page
+- [ ] User profile page
+- [ ] Search functionality
+
+---
+
+## 🌍 About
+
+We’re passionate about bringing the finest cuisine straight to your doorstep. From gourmet burgers to fresh salads, every meal should be an experience worth savoring.
+
 
 1. You'll first need a Supabase project which can be made [via the Supabase dashboard](https://database.new)
 

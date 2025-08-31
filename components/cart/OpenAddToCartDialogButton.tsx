@@ -3,12 +3,12 @@
 import { getInitialSelectedVariants, withAuthRequired } from "@/lib/utils";
 import { useCartStore } from "@/store/cart.store";
 import { Product } from "@/types/globals";
-import { Loader2, ShoppingCartIcon } from "lucide-react";
+import { ShoppingCartIcon } from "lucide-react";
 import { useState } from "react";
 import { toast } from "sonner";
+import AddToCartButton from "../products/AddToCartButton";
 import { Button } from "../ui/button";
 import CartItemDialog from "./CartItemDialog";
-import AddToCartButton from "../products/AddToCartButton";
 
 interface OpenAddToCartDialogButtonProps {
   product: Product;

@@ -21,7 +21,7 @@ export default async function CategoriesList() {
   }
 
   return (
-    <div className="mt-16 grid grid-cols-2 gap-4 md:grid-cols-[repeat(auto-fit,minmax(220px,1fr))] md:gap-6">
+    <div className="mt-16 grid grid-cols-2 gap-4 md:grid-cols-[repeat(auto-fit,minmax(280px,1fr))] md:gap-6">
       {categories.map((category) => (
         <CategoryCard key={category.id} category={category} />
       ))}

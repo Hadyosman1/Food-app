@@ -19,8 +19,8 @@ export default function WishlistItems() {
           Your wishlist is empty
         </h3>
         <p className="text-muted-foreground mb-6 max-w-md">
-          Start building your wishlist by browsing our products and adding items
-          you love.
+          Start building your wishlist by browsing our menu and adding items you
+          love.
         </p>
         <Button asChild size="lg" className="rounded-3xl px-8">
           <a href="/menu">

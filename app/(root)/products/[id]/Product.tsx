@@ -2,7 +2,6 @@
 
 import ProductQuantity from "@/components/products/ProductQuantity";
 import ProductVariants from "@/components/products/ProductsVariants";
-import { Button } from "@/components/ui/button";
 import ToggleWishlistItemButton from "@/components/wishlist/ToggleWishlistItemButton";
 import { Tables } from "@/database.types";
 import {

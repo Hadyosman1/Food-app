@@ -72,26 +72,37 @@ export default function CartButton() {
               <SidebarCartItem key={cartItem.id} cartItem={cartItem} />
             ))
           ) : (
-            <div className="bg-primary/10 mx-auto flex aspect-square w-fit flex-col items-center justify-center rounded-full p-5">
+            <div className="bg-primary/10 mx-auto flex aspect-square w-fit flex-col items-center justify-center rounded-full p-5 text-sm">
               <ShoppingBagIcon className="text-primary mb-4 h-12 w-12" />
               <p className="text-primary text-center">Your cart is empty.</p>
+              <p>Go and pick some items to your cart.</p>
+              <Button
+                onClick={() => setIsOpen(false)}
+                size="sm"
+                className="mt-2 rounded-3xl"
+                asChild
+              >
+                <Link href="/menu">Go to menu</Link>
+              </Button>
             </div>
           )}
         </div>
-        <SheetFooter className="bg-sidebar border-t">
-          {cartItems.length > 0 && (
-            <strong className="pb-2">
-              Total Price:{" "}
-              <span className="text-primary">
-                {formatCurrency(getCartTotalPrice())}
-              </span>
-            </strong>
-          )}
-          <Button>
-            <CreditCardIcon />
-            Checkout
-          </Button>
-        </SheetFooter>
+        {cartItemsLength > 0 && (
+          <SheetFooter className="bg-sidebar border-t">
+            {cartItems.length > 0 && (
+              <strong className="pb-2">
+                Total Price:{" "}
+                <span className="text-primary">
+                  {formatCurrency(getCartTotalPrice())}
+                </span>
+              </strong>
+            )}
+            <Button>
+              <CreditCardIcon />
+              Checkout
+            </Button>
+          </SheetFooter>
+        )}
       </SheetContent>
     </Sheet>
   );
